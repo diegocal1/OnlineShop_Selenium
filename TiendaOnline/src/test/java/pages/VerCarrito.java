@@ -67,13 +67,13 @@ public void SetUp() {
     genderRadioBtn.click();
    
     WebElement firstNameInput = driver.findElement(By.name("firstname"));
-    firstNameInput.sendKeys("Omar");
+    firstNameInput.sendKeys(faker.name().firstName());
     
     WebElement lastnameInput = driver.findElement(By.name("lastname"));
-    lastnameInput.sendKeys("Guzman");
+    lastnameInput.sendKeys(faker.name().lastName());
     
     WebElement emailInput = driver.findElement(By.name("email"));
-    emailInput.sendKeys("GuzmanO1@gmail.com");
+    emailInput.sendKeys(faker.internet().emailAddress());
     
     
     WebElement offerCheckbox = driver.findElement(By.name("optin"));
@@ -102,7 +102,7 @@ public void SetUp() {
 	stateListaDesplegable.selectByValue("47");
 	
 	 WebElement postalCodeInput = driver.findElement(By.name("postcode"));
-	 postalCodeInput.sendKeys(faker.number().digits(5));
+	 postalCodeInput.sendKeys("84043");
 	 
 	WebElement countryInput = driver.findElement(By.name("id_country"));
 	Select countryListaDesplegable= new Select(countryInput);
@@ -111,20 +111,25 @@ public void SetUp() {
 	WebElement phoneInput = driver.findElement(By.name("phone"));
 	phoneInput.sendKeys("2432343232");
 	
-	WebElement invoiceInput = driver.findElement(By.id("use_same_address"));
-	invoiceInput.click();
+	/*WebElement invoiceInput = driver.findElement(By.id("use_same_address"));
+	invoiceInput.click();*/
 	
 	WebElement continueCheckoutBtn = driver.findElement(By.name("confirm-addresses"));
 	continueCheckoutBtn.click();
 	
-	WebElement deliveryMsg = wait2.until(ExpectedConditions.visibilityOfElementLocated(By.id("delivery_message")));
-	deliveryMsg.sendKeys("Leave at the back door please");
+
+	WebElement continueChekoutBtn = driver.findElement(By.name("confirmDeliveryOption"));
+	continueChekoutBtn.click();
 	
-	WebElement confirmDeliveryBtn = driver.findElement(By.name("confirmDeliveryOption"));
-	confirmDeliveryBtn.click();
+	WebElement paymentOption = driver.findElement(By.id("payment-option-1"));
+	paymentOption.click();
 	
-	WebElement paymentRadio = driver.findElement(By.id("payment-option-2"));
-	paymentRadio.click();
+	WebElement termsRadio = driver.findElement(By.name("conditions_to_approve[terms-and-conditions]"));
+	termsRadio.click();
+	
+	WebElement placeOrderBtn = driver.findElement(By.xpath("//*[@id=\"payment-confirmation\"]/div[1]/button"));
+	placeOrderBtn.click();
+	
 	
 	}
     
